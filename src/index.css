@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --font-signature: "PhotographSignature", cursive;
+  --font-sans: "Times New Roman", "Times", "serif";
+  --font-horror: "Creepster", system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-madman: "Madman", cursive;
+
+  --color-horror-red: #8b0000;
+  --color-horror-purple: #2d004d;
+  --color-horror-dark: #0a0a0a;
+}
+
+/* =========================
+   BASE
+========================= */
+@layer base {
+  body {
+    @apply bg-horror-dark text-gray-200 font-sans selection:bg-horror-red/30;
+    cursor: url('https://cur.cursors-4u.net/others/oth-2/oth153.cur'), auto;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-white;
+  }
+}
+
+/* =========================
+   FONTS
+========================= */
+
+@font-face {
+  font-family: 'PhotographSignature';
+  src: url('/fonts/1FTV-Photograph-Signature.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HorrorCustom';
+  src: url('/fonts/horror.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CinematicCustom';
+  src: url('/fonts/cinematic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ParallelCustom';
+  src: url('/fonts/parallel.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 👇 FONT MỚI CHO KHƯƠNG TÚC */
+@font-face {
+  font-family: 'Madman';
+  src: url('/fonts/DFVN-TheTypingofaMadman.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================
+   EFFECTS
+========================= */
+.horror-reveal {
+  @apply opacity-0 translate-y-4 transition-all duration-1000 ease-out;
+}
+
+.horror-reveal.visible {
+  @apply opacity-100 translate-y-0;
+}
+
+/* Vignette */
+.vignette {
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+}
+
+/* Grain effect */
+.grain {
+  position: relative;
+}
+
+.grain::after {
+  content: "";
+  position: fixed;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 50;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform:translate(0, 0) }
+  10% { transform:translate(-5%, -10%) }
+  20% { transform:translate(-15%, 5%) }
+  30% { transform:translate(7%, -25%) }
+  40% { transform:translate(-5%, 25%) }
+  50% { transform:translate(-15%, 10%) }
+  60% { transform:translate(15%, 0) }
+  70% { transform:translate(0, 15%) }
+  80% { transform:translate(3%, 35%) }
+  90% { transform:translate(-10%, 10%) }
+}

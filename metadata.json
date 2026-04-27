@@ -1,0 +1,6 @@
+{
+  "name": "Khương Túc - Horror Survival",
+  "description": "An interactive storytelling platform for the Khương Túc horror universe. Survive the parallel world school, identify the traitors, and complete the missions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["Supabase Backend", "Admin Dashboard", "Horror UI"]
+}
