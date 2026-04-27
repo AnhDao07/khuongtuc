@@ -25,3 +25,11 @@ export interface StoryEvent {
   status: EventStatus;
   created_at: string;
 }
+
+export interface StoryLegend {
+  id: string;
+  title: string;
+  content: string;
+  image_url?: string;
+  updated_at: string;
+}
