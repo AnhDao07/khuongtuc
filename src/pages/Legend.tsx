@@ -21,7 +21,7 @@ export default function Legend() {
         setLegend({
           id: '1',
           title: ' Thông tin chung về thế giới song song',
-          content: 'Đang tải dữ liệu từ thế giới song song...',
+          content: 'Đang tải dữ \n liệu từ thế giới song song...',
           updated_at: new Date().toISOString()
         });
       } else {
