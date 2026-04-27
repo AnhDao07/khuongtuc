@@ -24,7 +24,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-  <h2 className="text-horror-red font-signature text-4xl mb-4 tracking-[0.2em]">
+  <h2 className="text-horror-red font-signature text-6xl mb-4 tracking-[0.2em]">
   Chào mừng đến với
 </h2>
             <h1 className="text-7xl md:text-9xl font-madman text-white mb-6 tracking-tighter mix-blend-difference">
