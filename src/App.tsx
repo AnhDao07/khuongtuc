@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Events from './pages/Events';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
+import Legend from './pages/Legend';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/legend" element={<Legend />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Home />} />
