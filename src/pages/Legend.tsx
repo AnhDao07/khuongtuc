@@ -20,7 +20,7 @@ export default function Legend() {
         // Fallback or default content if table doesn't exist yet
         setLegend({
           id: '1',
-          title: 'Truyền Thuyết Khương Túc',
+          title: ' Thông tin chung về thế giới song song',
           content: 'Đang tải dữ liệu từ thế giới song song...',
           updated_at: new Date().toISOString()
         });
@@ -75,7 +75,7 @@ export default function Legend() {
             <div className="flex items-center gap-3 mb-6">
               <Ghost className="w-8 h-8 text-horror-red" />
               <h1 className="text-4xl sm:text-5xl font-display font-bold text-white uppercase tracking-tighter">
-                {legend?.title || 'Truyền Thuyết Khương Túc'}
+                {legend?.title || 'Truyền Thuyết'}
               </h1>
             </div>
 
@@ -99,7 +99,7 @@ export default function Legend() {
                 <span className="font-bold uppercase tracking-widest text-sm text-white">Cảnh báo</span>
               </div>
               <p className="text-sm text-gray-400 italic">
-                Bất cứ ai đọc được những dòng này đều đã bị đánh dấu. Đừng tin bất kỳ ai, ngay cả chính mình.
+                Đừng tin bất kỳ ai, ngay cả chính mình.
               </p>
             </div>
           </div>
