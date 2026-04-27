@@ -42,9 +42,12 @@ export default function Home() {
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300" />
               </Link>
               
-              <button className="px-8 py-4 border border-gray-600 text-gray-300 hover:border-white hover:text-white transition-all font-display italic">
+              <Link 
+                to="/legend"
+                className="px-8 py-4 border border-gray-600 text-gray-300 hover:border-white hover:text-white transition-all font-display italic flex items-center justify-center"
+              >
                 Tìm hiểu truyền thuyết
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
