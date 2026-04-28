@@ -31,7 +31,7 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-2">
               <Ghost className="w-8 h-8 text-horror-red animate-pulse" />
-              <span className="font-horror text-2xl text-horror-red tracking-wider">KHƯƠNG TÚC</span>
+              <span className="font-serif text-2xl text-horror-red tracking-wider">  KHƯƠNG TÚC </span>    
             </Link>
             
             {/* Desktop Navigation */}
