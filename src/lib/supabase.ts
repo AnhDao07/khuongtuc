@@ -33,3 +33,13 @@ export interface StoryLegend {
   image_url?: string;
   updated_at: string;
 }
+
+export interface StoryCharacter {
+  id: string;
+  name: string;
+  bio: string;
+  image_url?: string;
+  role: string;
+  is_traitor?: boolean;
+  created_at: string;
+}
