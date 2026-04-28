@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { motion } from 'motion/react';
-import { Ghost, Calendar, ShieldAlert, LogIn, LogOut } from 'lucide-react';
+import { ReactNode, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Ghost, Calendar, ShieldAlert, LogIn, LogOut, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
@@ -12,10 +12,17 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const { user } = useAuth();
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
   };
+
+  const navLinks = [
+    { to: '/', label: 'Trang Chủ' },
+    { to: '/characters', label: 'Nhân Vật' },
+    { to: '/events', label: 'Sự Kiện' },
+  ];
 
   return (
     <div className="min-h-screen grain bg-horror-dark flex flex-col">
@@ -27,16 +34,17 @@ export default function Layout({ children }: LayoutProps) {
               <span className="font-horror text-2xl text-horror-red tracking-wider">KHƯƠNG TÚC</span>
             </Link>
             
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              <NavLink to="/" active={location.pathname === '/'}>Trang Chủ</NavLink>
-              <NavLink to="/characters" active={location.pathname === '/characters'}>Nhân Vật</NavLink>
-              <NavLink to="/events" active={location.pathname === '/events'}>Sự Kiện</NavLink>
+              {navLinks.map(link => (
+                <NavLink key={link.to} to={link.to} active={location.pathname === link.to}>{link.label}</NavLink>
+              ))}
               {user ? (
                 <>
                   <NavLink to="/admin" active={location.pathname === '/admin'}>Quản Trị</NavLink>
                   <button 
                     onClick={handleLogout}
-                    className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                    className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-medium tracking-widest uppercase"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>Đăng Xuất</span>
@@ -45,15 +53,86 @@ export default function Layout({ children }: LayoutProps) {
               ) : (
                 <Link 
                   to="/login" 
-                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-medium tracking-widest uppercase"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Admin</span>
                 </Link>
               )}
             </div>
+
+            {/* Mobile Menu Toggle */}
+            <div className="md:hidden">
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-horror-red/10 bg-horror-dark/95 overflow-hidden"
+            >
+              <div className="px-4 py-6 space-y-4">
+                {navLinks.map(link => (
+                  <Link 
+                    key={link.to}
+                    to={link.to} 
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`block py-2 text-lg font-display tracking-widest uppercase transition-colors ${
+                      location.pathname === link.to ? 'text-horror-red' : 'text-gray-400'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                
+                {user ? (
+                  <>
+                    <Link 
+                      to="/admin" 
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block py-2 text-lg font-display tracking-widest uppercase transition-colors ${
+                        location.pathname === '/admin' ? 'text-horror-red' : 'text-gray-400'
+                      }`}
+                    >
+                      Quản Trị
+                    </Link>
+                    <button 
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="flex items-center gap-2 py-2 text-gray-400 text-lg font-display tracking-widest uppercase w-full"
+                    >
+                      <LogOut className="w-5 h-5" />
+                      <span>Đăng Xuất</span>
+                    </button>
+                  </>
+                ) : (
+                  <Link 
+                    to="/login" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center gap-2 py-2 text-gray-400 text-lg font-display tracking-widest uppercase"
+                  >
+                    <LogIn className="w-5 h-5" />
+                    <span>Admin</span>
+                  </Link>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <main className="flex-grow">
@@ -72,7 +151,15 @@ export default function Layout({ children }: LayoutProps) {
   );
 }
 
-function NavLink({ to, children, active }: { to: string, children: ReactNode, active: boolean }) {
+
+interface NavLinkProps {
+  to: string;
+  children: ReactNode;
+  active: boolean;
+  key?: string | number;
+}
+
+function NavLink({ to, children, active }: NavLinkProps) {
   return (
     <Link 
       to={to} 
