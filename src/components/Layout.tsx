@@ -29,7 +29,8 @@ export default function Layout({ children }: LayoutProps) {
 </span>         </Link>
             
             <div className="hidden md:flex items-center gap-8">
-              <NavLink to="/" active={location.pathname === '/'}>Trang Chủ</NavLink>
+              <NavLink to="/" active={location.pathname === '/'}>Trang Chủ</NavLink>              
+              <NavLink to="/characters" active={location.pathname === '/characters'}>Nhân Vật</NavLink>
               <NavLink to="/events" active={location.pathname === '/events'}>Sự Kiện</NavLink>
               {user ? (
                 <>
