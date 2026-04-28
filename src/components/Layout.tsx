@@ -24,12 +24,11 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-2">
               <Ghost className="w-8 h-8 text-horror-red animate-pulse" />
-<span className="font-serif text-2xl text-horror-red tracking-wider">
-  KHƯƠNG TÚC
-</span>         </Link>
+              <span className="font-horror text-2xl text-horror-red tracking-wider">KHƯƠNG TÚC</span>
+            </Link>
             
             <div className="hidden md:flex items-center gap-8">
-              <NavLink to="/" active={location.pathname === '/'}>Trang Chủ</NavLink>              
+              <NavLink to="/" active={location.pathname === '/'}>Trang Chủ</NavLink>
               <NavLink to="/characters" active={location.pathname === '/characters'}>Nhân Vật</NavLink>
               <NavLink to="/events" active={location.pathname === '/events'}>Sự Kiện</NavLink>
               {user ? (
